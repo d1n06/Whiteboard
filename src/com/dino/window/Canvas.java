@@ -16,21 +16,25 @@ public class Canvas extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 3808105883119338437L;
+
+	public final static double MINDIST = 5;
 	
-	static MouseInput mouse;
-	static ArrayList<Curve> drawing = new ArrayList<>();
-	static ArrayList<Curve> undoList = new ArrayList<>();
-	static Curve current = new Curve();
-	static boolean penDown = false;
-	static boolean moving = false;
-	static boolean erasing = false;
+	MouseInput mouse;
+	ArrayList<Curve> drawing = new ArrayList<>();
+	ArrayList<Curve> undoList = new ArrayList<>();
+	Curve current = new Curve();
+	boolean penDown = false;
+	boolean moving = false;
+	boolean erasing = false;
 	
 	double dx = 0;
 	double dy = 0;
+
+	Window window;
 	
-	public static final double MINDIST = 5;
-	
-	public Canvas() {
+	public Canvas(Window window) {
+		this.window = window;
+		
 		mouse = new MouseInput(this);
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
@@ -57,6 +61,10 @@ public class Canvas extends JPanel {
 			}
 			
 			for (Curve c : toErase) drawing.remove(c);
+			
+			// The drawing has changed from the original drawing
+			window.getFileManager().changed = true;
+			window.updateTitle();
 		}
 		
 		if (mouse.isPressedOnly(MouseInput.MOUSE1)) startCurve(mouse.getX() - dx, mouse.getY() - dy);
@@ -84,30 +92,42 @@ public class Canvas extends JPanel {
 		drawing.add(current.clone());
 		current.reset();
 		penDown = false;
+		
+		// The drawing has changed from the original drawing
+		window.getFileManager().changed = true;
+		window.updateTitle();
 	}
 
-	public static ArrayList<Curve> getDrawing() {
+	public ArrayList<Curve> getDrawing() {
 		return drawing;
 	}
 
-	public static void setDrawing(ArrayList<Curve> drawing) {
-		Canvas.drawing = drawing;
+	public void setDrawing(ArrayList<Curve> drawing) {
+		this.drawing = drawing;
 	}
 	
-	public static void clear() {
-		Canvas.drawing = new ArrayList<>();
+	public void clear() {
+		drawing = new ArrayList<>();
 	}
 	
-	public static void undo() {
+	public void undo() {
 		if (drawing.size() == 0) return;
 		undoList.add(drawing.get(drawing.size()-1));
 		drawing.remove(drawing.size()-1);
+		
+		// The drawing has changed from the original drawing
+		window.getFileManager().changed = true;
+		window.updateTitle();
 	}
 	
-	public static void redo() {
+	public void redo() {
 		if (undoList.size() == 0) return;
 		drawing.add(undoList.get(undoList.size()-1));
 		undoList.remove(undoList.size()-1);
+		
+		// The drawing has changed from the original drawing
+		window.getFileManager().changed = true;
+		window.updateTitle();
 	}
 	
 }

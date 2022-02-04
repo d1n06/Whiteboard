@@ -9,7 +9,7 @@ import com.dino.Reference;
 
 public class MenuBar {
 
-	public static JMenuBar makeMenuBar(Canvas canvas) {
+	public static JMenuBar makeMenuBar(Canvas canvas, FileManager fm) {
 		JMenuBar mb = new JMenuBar();
 		
 		JMenu fileMenu = new JMenu(Reference.MENU_FILE);
@@ -19,10 +19,10 @@ public class MenuBar {
 		JMenuItem saveAsItem = new JMenuItem(Reference.MENU_FILE_SAVEAS);
 		JMenuItem openItem = new JMenuItem(Reference.MENU_FILE_OPEN, new ImageIcon("res/open.png"));
 		
-		newItem.addActionListener(e -> {Canvas.clear(); canvas.repaint();});
-		saveItem.addActionListener(e -> {FileManager.save(); canvas.repaint();});
-		saveAsItem.addActionListener(e -> {FileManager.saveAs(); canvas.repaint();});
-		openItem.addActionListener(e -> {FileManager.open(); canvas.repaint();});
+		newItem.addActionListener(e -> {canvas.clear(); canvas.repaint();});
+		saveItem.addActionListener(e -> {fm.save(); canvas.repaint();});
+		saveAsItem.addActionListener(e -> {fm.saveAs(); canvas.repaint();});
+		openItem.addActionListener(e -> {fm.open(); canvas.repaint();});
 		
 		newItem.setAccelerator(KeyStroke.getKeyStroke("control N"));
 		saveItem.setAccelerator(KeyStroke.getKeyStroke("control S"));
@@ -41,8 +41,8 @@ public class MenuBar {
 		JMenuItem undoItem = new JMenuItem(Reference.MENU_EDIT_UNDO);
 		JMenuItem redoItem = new JMenuItem(Reference.MENU_EDIT_REDO);
 		
-		undoItem.addActionListener(e -> {Canvas.undo(); canvas.repaint();});
-		redoItem.addActionListener(e -> {Canvas.redo(); canvas.repaint();});
+		undoItem.addActionListener(e -> {canvas.undo(); canvas.repaint();});
+		redoItem.addActionListener(e -> {canvas.redo(); canvas.repaint();});
 		
 		undoItem.setAccelerator(KeyStroke.getKeyStroke("control Z"));
 		redoItem.setAccelerator(KeyStroke.getKeyStroke("control Y"));

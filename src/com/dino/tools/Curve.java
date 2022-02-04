@@ -3,6 +3,7 @@ package com.dino.tools;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
@@ -85,9 +86,17 @@ public class Curve {
 		return c;
 	}
 	
+	public Rectangle getBounds() {
+		Rectangle bounds = path.getBounds();
+		Rectangle newBounds = new Rectangle();
+		
+		newBounds.setFrame(bounds.getX()-1, bounds.getY()-1, bounds.getWidth()+2, bounds.getHeight()+2);
+		return newBounds;
+	}
+	
 	public boolean containsPoint(Point2D.Double p) {
 		if (length == 1) return points.get(0).distance(p) <= Canvas.MINDIST;
-		return path.getBounds().contains(p);
+		return getBounds().contains(p);
 	}
 	
 }

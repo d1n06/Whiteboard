@@ -21,5 +21,13 @@ public class Reference {
 	
 	public static final String FILE_EXTENSION = "wht";
 	public static final String FILE_EXTENSION_DESCRIPTION = ".wht - Whiteboard file";
+
+	public static final String UNSAVED_EXIT_DIALOG_TITLE = "Unsaved changes";
+	public static final String UNSAVED_EXIT_DIALOG_MESSAGE = "Your drawing has unsaved changes. Do you wish to save before exiting?";
+	public static final Object[] UNSAVED_EXIT_DIALOG_OPTIONS = {
+			"Yes, save and exit",
+			"No, discard changes",
+			"Cancel"
+	};
 	
 }
