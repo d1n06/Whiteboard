@@ -1,5 +1,6 @@
 package com.dino.window;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.nio.file.Paths;
 
@@ -28,13 +29,17 @@ public class Window extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon("res/icon2.png").getImage());
-		
-		canvas = new Canvas(this);
-		getContentPane().add(canvas);
-		
+
 		fm = new FileManager(this);
-		
+
 		setJMenuBar(MenuBar.makeMenuBar(canvas, fm));
+		
+		getContentPane().setLayout(new BorderLayout());
+
+		canvas = new Canvas(this);
+		getContentPane().add(ToolBar.makeToolBar(canvas), BorderLayout.PAGE_START);
+		getContentPane().add(canvas, BorderLayout.CENTER);
+		
 		
 		setVisible(true);
 		
@@ -43,10 +48,7 @@ public class Window extends JFrame {
 	
 	@Override
 	public void dispose() {
-		if (!fm.changed) {
-			System.exit(0);
-			return; // is this necessary?
-		}
+		if (!fm.changed) System.exit(0);
 		
 		int choice = JOptionPane.showOptionDialog(this, Reference.UNSAVED_EXIT_DIALOG_MESSAGE, Reference.UNSAVED_EXIT_DIALOG_TITLE,
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null,

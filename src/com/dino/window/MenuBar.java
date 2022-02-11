@@ -14,10 +14,10 @@ public class MenuBar {
 		
 		JMenu fileMenu = new JMenu(Reference.MENU_FILE);
 		
-		JMenuItem newItem = new JMenuItem(Reference.MENU_FILE_NEW, new ImageIcon("res/file.png"));
-		JMenuItem saveItem = new JMenuItem(Reference.MENU_FILE_SAVE, new ImageIcon("res/save.png"));
-		JMenuItem saveAsItem = new JMenuItem(Reference.MENU_FILE_SAVEAS);
-		JMenuItem openItem = new JMenuItem(Reference.MENU_FILE_OPEN, new ImageIcon("res/open.png"));
+		JMenuItem newItem = new JMenuItem(Reference.MENU_FILE_NEW, new ImageIcon(Reference.MENU_FILE_NEW_ICON));
+		JMenuItem saveItem = new JMenuItem(Reference.MENU_FILE_SAVE, new ImageIcon(Reference.MENU_FILE_SAVE_ICON));
+		JMenuItem saveAsItem = new JMenuItem(Reference.MENU_FILE_SAVEAS, new ImageIcon(Reference.MENU_FILE_SAVEAS_ICON));
+		JMenuItem openItem = new JMenuItem(Reference.MENU_FILE_OPEN, new ImageIcon(Reference.MENU_FILE_OPEN_ICON));
 		
 		newItem.addActionListener(e -> {canvas.clear(); canvas.repaint();});
 		saveItem.addActionListener(e -> {fm.save(); canvas.repaint();});
@@ -38,8 +38,8 @@ public class MenuBar {
 		
 		JMenu editMenu = new JMenu(Reference.MENU_EDIT);
 		
-		JMenuItem undoItem = new JMenuItem(Reference.MENU_EDIT_UNDO);
-		JMenuItem redoItem = new JMenuItem(Reference.MENU_EDIT_REDO);
+		JMenuItem undoItem = new JMenuItem(Reference.MENU_EDIT_UNDO, new ImageIcon(Reference.MENU_EDIT_UNDO_ICON));
+		JMenuItem redoItem = new JMenuItem(Reference.MENU_EDIT_REDO, new ImageIcon(Reference.MENU_EDIT_REDO_ICON));
 		
 		undoItem.addActionListener(e -> {canvas.undo(); canvas.repaint();});
 		redoItem.addActionListener(e -> {canvas.redo(); canvas.repaint();});

@@ -11,11 +11,6 @@ import javax.swing.JPanel;
 import com.dino.tools.Curve;
 
 public class Canvas extends JPanel {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3808105883119338437L;
 
 	public final static double MINDIST = 5;
 	
@@ -31,6 +26,13 @@ public class Canvas extends JPanel {
 	double dy = 0;
 
 	Window window;
+	
+	int selectedTool = 0;
+	
+	public final static int PEN = 0;
+	public final static int ERASER = 1;
+	public final static int MOVE = 2;
+	public final static int ZOOM = 3;
 	
 	public Canvas(Window window) {
 		this.window = window;
@@ -67,14 +69,22 @@ public class Canvas extends JPanel {
 			window.updateTitle();
 		}
 		
-		if (mouse.isPressedOnly(MouseInput.MOUSE1)) startCurve(mouse.getX() - dx, mouse.getY() - dy);
-		else if (mouse.isReleased(MouseInput.MOUSE1) && penDown) endCurve();
-		
-		if (mouse.isPressed(MouseInput.MOUSE1) && mouse.isHeld(MouseInput.MOUSE2)) moving = true;
-		else if (mouse.isReleased(MouseInput.MOUSE1) || mouse.isReleased(MouseInput.MOUSE2)) moving = false;
-		
-		if (mouse.isPressed(MouseInput.MOUSE1) && mouse.isHeld(MouseInput.MOUSE3)) erasing = true;
-		else if (mouse.isReleased(MouseInput.MOUSE1) || mouse.isReleased(MouseInput.MOUSE3)) erasing = false;
+		switch (selectedTool) {
+		case PEN:
+			if (mouse.isPressedOnly(MouseInput.MOUSE1)) startCurve(mouse.getX() - dx, mouse.getY() - dy);
+			else if (mouse.isReleased(MouseInput.MOUSE1) && penDown) endCurve();
+			break;
+			
+		case ERASER:
+			if (mouse.isPressed(MouseInput.MOUSE1)) erasing = true;
+			else if (mouse.isReleased(MouseInput.MOUSE1)) erasing = false;
+			break;
+			
+		case MOVE:
+			if (mouse.isPressedOnly(MouseInput.MOUSE1)) moving = true;
+			else if (mouse.isReleased(MouseInput.MOUSE1)) moving = false;
+			break;
+		}
 		
 		mouse.reset();
 	}
