@@ -4,7 +4,7 @@ public class Reference {
 
 	// PROGRAM INFO
 	public static final String PROGRAM_NAME = "Whiteboard";
-	public static final String PROGRAM_VERSION = "0.1";
+	public static final String PROGRAM_VERSION = "0.0.1";
 	
 	// MENU BAR
 	public static final String MENU_FILE = "File";
