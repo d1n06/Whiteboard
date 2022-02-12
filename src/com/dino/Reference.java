@@ -15,16 +15,16 @@ public class Reference {
 	public static final String MENU_FILE_SAVEAS = "Save As...";
 	public static final String MENU_FILE_OPEN = "Open...";
 	
-	public static final String MENU_FILE_NEW_ICON = "res/icons/document-new.png";
-	public static final String MENU_FILE_SAVE_ICON = "res/icons/document-save.png";
-	public static final String MENU_FILE_SAVEAS_ICON = "res/icons/document-save-as.png";
-	public static final String MENU_FILE_OPEN_ICON = "res/icons/document-open.png";
+	public static final String MENU_FILE_NEW_ICON = "/icons/document-new.png";
+	public static final String MENU_FILE_SAVE_ICON = "/icons/document-save.png";
+	public static final String MENU_FILE_SAVEAS_ICON = "/icons/document-save-as.png";
+	public static final String MENU_FILE_OPEN_ICON = "/icons/document-open.png";
 	
 	public static final String MENU_EDIT_UNDO = "Undo";
 	public static final String MENU_EDIT_REDO = "Redo";
 	
-	public static final String MENU_EDIT_UNDO_ICON = "res/icons/edit-undo.png";
-	public static final String MENU_EDIT_REDO_ICON = "res/icons/edit-redo.png";
+	public static final String MENU_EDIT_UNDO_ICON = "/icons/edit-undo.png";
+	public static final String MENU_EDIT_REDO_ICON = "/icons/edit-redo.png";
 	
 	// TOOL BAR
 	public static final String TOOLBAR_PENCIL_TIP = "Pencil";
@@ -32,10 +32,10 @@ public class Reference {
 	public static final String TOOLBAR_MOVE_TIP = "Move";
 	public static final String TOOLBAR_ZOOM_TIP = "Zoom";
 	
-	public static final String TOOLBAR_PENCIL_ICON = "res/icons/gimp-tool-pencil.png";
-	public static final String TOOLBAR_ERASER_ICON = "res/icons/gimp-tool-eraser.png";
-	public static final String TOOLBAR_MOVE_ICON = "res/icons/gimp-tool-move.png";
-	public static final String TOOLBAR_ZOOM_ICON = "res/icons/gimp-tool-zoom.png";
+	public static final String TOOLBAR_PENCIL_ICON = "/icons/gimp-tool-pencil.png";
+	public static final String TOOLBAR_ERASER_ICON = "/icons/gimp-tool-eraser.png";
+	public static final String TOOLBAR_MOVE_ICON = "/icons/gimp-tool-move.png";
+	public static final String TOOLBAR_ZOOM_ICON = "/icons/gimp-tool-zoom.png";
 	
 	// FILE DIALOGS
 	public static final String SAVEDIALOG_TITLE = "Save";

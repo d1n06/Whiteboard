@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
 import com.dino.Reference;
+import com.dino.tools.Tools;
 
 public class ToolBar {
 
@@ -20,10 +20,10 @@ public class ToolBar {
 		JToolBar tb = new JToolBar("tools", JToolBar.HORIZONTAL);
 		
 		tools = new JToggleButton[4];
-		tools[0] = new JToggleButton(new ImageIcon(Reference.TOOLBAR_PENCIL_ICON));	
-		tools[1] = new JToggleButton(new ImageIcon(Reference.TOOLBAR_ERASER_ICON));	
-		tools[2] = new JToggleButton(new ImageIcon(Reference.TOOLBAR_MOVE_ICON));	
-		tools[3] = new JToggleButton(new ImageIcon(Reference.TOOLBAR_ZOOM_ICON));
+		tools[0] = new JToggleButton(Tools.getImageIcon(Reference.TOOLBAR_PENCIL_ICON));	
+		tools[1] = new JToggleButton(Tools.getImageIcon(Reference.TOOLBAR_ERASER_ICON));	
+		tools[2] = new JToggleButton(Tools.getImageIcon(Reference.TOOLBAR_MOVE_ICON));	
+		tools[3] = new JToggleButton(Tools.getImageIcon(Reference.TOOLBAR_ZOOM_ICON));
 		
 		tools[0].setToolTipText(Reference.TOOLBAR_PENCIL_TIP);
 		tools[1].setToolTipText(Reference.TOOLBAR_ERASER_TIP);

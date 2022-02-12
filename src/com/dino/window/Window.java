@@ -4,11 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.nio.file.Paths;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.dino.Reference;
+import com.dino.tools.Tools;
 
 public class Window extends JFrame {
 
@@ -28,7 +28,7 @@ public class Window extends JFrame {
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setIconImage(new ImageIcon("res/icon2.png").getImage());
+		setIconImage(Tools.getImage("/icon2.png"));
 
 		fm = new FileManager(this);
 
