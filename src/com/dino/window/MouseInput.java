@@ -15,8 +15,8 @@ public class MouseInput extends MouseAdapter {
     private ArrayList<Integer> releasedButtons = new ArrayList<Integer>();
     
     public static final int MOUSE1 = MouseEvent.BUTTON1;
-    public static final int MOUSE2 = MouseEvent.BUTTON2;
-    public static final int MOUSE3 = MouseEvent.BUTTON3;
+    public static final int MOUSE2 = MouseEvent.BUTTON3; // el boton 2 siempre es el derecho bobo
+    public static final int MOUSE3 = MouseEvent.BUTTON2;
     
 	
 	public MouseInput(Canvas canvas) {
@@ -114,12 +114,16 @@ public class MouseInput extends MouseAdapter {
         return releasedButtons;
     }
     
-    public boolean isHeldOnly(int b) {
+    public boolean isHeldAlone(int b) {
     	return isHeld(b) && heldButtons.size() == 1;
     }
     
-    public boolean isPressedOnly(int b) {
+    public boolean isPressedAlone(int b) {
     	return isPressed(b) && heldButtons.size() == 1;
+    }
+    
+    public boolean isReleasedAlone(int b) {
+    	return isReleased(b) && heldButtons.size() == 0;
     }
 
 	

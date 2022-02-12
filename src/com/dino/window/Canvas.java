@@ -7,6 +7,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 import com.dino.tools.Curve;
 
@@ -14,28 +15,32 @@ public class Canvas extends JPanel {
 
 	public final static double MINDIST = 5;
 	
-	MouseInput mouse;
-	ArrayList<Curve> drawing = new ArrayList<>();
-	ArrayList<Curve> undoList = new ArrayList<>();
-	Curve current = new Curve();
-	boolean penDown = false;
-	boolean moving = false;
-	boolean erasing = false;
+	private MouseInput mouse;
+	private ArrayList<Curve> drawing = new ArrayList<>();
+	private ArrayList<Curve> undoList = new ArrayList<>();
+	private Curve current = new Curve();
+	private boolean penDown = false;
+	private boolean moving = false;
+	private boolean erasing = false;
 	
-	double dx = 0;
-	double dy = 0;
+	private double dx = 0;
+	private double dy = 0;
 
-	Window window;
+	private Window window;
+	private JPopupMenu contextMenu;
 	
-	int selectedTool = 0;
+	public int selectedTool = 0;
 	
-	public final static int PEN = 0;
+	public final static int PENCIL = 0;
 	public final static int ERASER = 1;
 	public final static int MOVE = 2;
 	public final static int ZOOM = 3;
 	
 	public Canvas(Window window) {
 		this.window = window;
+
+		contextMenu = ContextMenu.makeContextMenu(this);
+		add(contextMenu);
 		
 		mouse = new MouseInput(this);
 		addMouseListener(mouse);
@@ -70,8 +75,8 @@ public class Canvas extends JPanel {
 		}
 		
 		switch (selectedTool) {
-		case PEN:
-			if (mouse.isPressedOnly(MouseInput.MOUSE1)) startCurve(mouse.getX() - dx, mouse.getY() - dy);
+		case PENCIL:
+			if (mouse.isPressedAlone(MouseInput.MOUSE1)) startCurve(mouse.getX() - dx, mouse.getY() - dy);
 			else if (mouse.isReleased(MouseInput.MOUSE1) && penDown) endCurve();
 			break;
 			
@@ -81,10 +86,12 @@ public class Canvas extends JPanel {
 			break;
 			
 		case MOVE:
-			if (mouse.isPressedOnly(MouseInput.MOUSE1)) moving = true;
+			if (mouse.isPressedAlone(MouseInput.MOUSE1)) moving = true;
 			else if (mouse.isReleased(MouseInput.MOUSE1)) moving = false;
 			break;
 		}
+		
+		if (mouse.isReleasedAlone(MouseInput.MOUSE2)) contextMenu.show(this, mouse.getX(), mouse.getY());
 		
 		mouse.reset();
 	}

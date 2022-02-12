@@ -14,7 +14,7 @@ import com.dino.tools.Tools;
 
 public class ToolBar {
 
-	static JToggleButton[] tools;
+	private static JToggleButton[] tools;
 	
 	public static JToolBar makeToolBar(Canvas canvas) {
 		JToolBar tb = new JToolBar("tools", JToolBar.HORIZONTAL);
@@ -57,6 +57,16 @@ public class ToolBar {
 		}
 		
 		b.setSelected(true);
+		
+		canvas.selectedTool = tool;
+	}
+	
+	public static void chooseTool(int tool, Canvas canvas) {
+		for (int i = 0; i < tools.length; i++) {
+			if (i != tool) tools[i].setSelected(false);
+		}
+		
+		tools[tool].setSelected(true);
 		
 		canvas.selectedTool = tool;
 	}
