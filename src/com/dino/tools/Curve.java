@@ -55,15 +55,15 @@ public class Curve {
 		length = 0;
 	}
 	
-	public void draw(Graphics2D g, double dx, double dy) {
+	public void draw(Graphics2D g, double cx, double cy, double zoom) {
 		g.setColor(Color.black);
-		g.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+		g.setStroke(new BasicStroke((float) (2*zoom), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		if (length == 1) {
 			Point2D p = currentPoint();
-			g.draw((Shape) new Line2D.Double(p.getX() + dx, p.getY() + dy, p.getX() + dx, p.getY() + dy));
+			g.draw((Shape) new Line2D.Double(zoom*p.getX() - cx, zoom*p.getY() - cy, zoom*p.getX() - cx, zoom*p.getY() - cy));
 		} else if (length > 0) {
 			Path2D.Double transformedPath = (Double) path.clone();
-			transformedPath.transform(new AffineTransform(1,0,0,1,dx,dy));
+			transformedPath.transform(new AffineTransform(zoom,0,0,zoom,-cx,-cy));
 			g.draw(transformedPath);
 		}
 	}

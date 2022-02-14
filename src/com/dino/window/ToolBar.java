@@ -59,6 +59,7 @@ public class ToolBar {
 		b.setSelected(true);
 		
 		canvas.selectedTool = tool;
+		canvas.changeCursor(tool);
 	}
 	
 	public static void chooseTool(int tool, Canvas canvas) {
@@ -69,6 +70,7 @@ public class ToolBar {
 		tools[tool].setSelected(true);
 		
 		canvas.selectedTool = tool;
+		canvas.changeCursor(tool);
 	}
 	
 	private static void addButtonShortcut(JToggleButton b, String keyStroke, Canvas canvas) {
