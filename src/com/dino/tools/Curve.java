@@ -20,10 +20,14 @@ public class Curve {
 	private ArrayList<Point2D.Double> points;
 	private int length;
 	
+	Color c;
+	
 	public Curve() {
 		path = new Path2D.Double();
 		points = new ArrayList<Point2D.Double>();
 		length = 0;
+		
+		c = Color.black;
 	}
 	
 	public void addPoint(double x, double y) {
@@ -56,7 +60,7 @@ public class Curve {
 	}
 	
 	public void draw(Graphics2D g, double cx, double cy, double zoom) {
-		g.setColor(Color.black);
+		g.setColor(c);
 		g.setStroke(new BasicStroke((float) (2*zoom), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		if (length == 1) {
 			Point2D p = currentPoint();
@@ -97,6 +101,27 @@ public class Curve {
 	public boolean containsPoint(Point2D.Double p) {
 		if (length == 1) return points.get(0).distance(p) <= Canvas.MINDIST;
 		return getBounds().contains(p);
+	}
+	
+	public void setColor(Color c) {
+		this.c = c;
+	}
+	
+	public void setColor(int rgb) {
+		this.c = new Color(rgb);
+	}
+	
+	public Color getColor() {
+		return c;
+	}
+	
+	public String getFileData() {
+		String s = "";
+		
+		s += "c" + c.getRGB() + " ";
+		for (Point2D.Double p : getPoints()) s += p.getX() + " " + p.getY() + " ";
+		
+		return s;
 	}
 	
 }

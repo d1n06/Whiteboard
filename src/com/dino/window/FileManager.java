@@ -1,5 +1,6 @@
 package com.dino.window;
 
+import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -62,17 +64,28 @@ public class FileManager {
 		ArrayList<Curve> drawing = new ArrayList<>();
 		for (String line : lines) {
 			String[] args = line.split(" ");
+			String[] coords = args;
 			
-			if (args.length < 2) continue;
+			Color col = Color.black;
+			
+			if (args[0].charAt(0) == 'c') {
+				col = new Color(Integer.parseInt(args[0].substring(1)));
+				coords = Arrays.copyOfRange(args, 1, args.length);
+			}
+			
+			if (coords.length < 2) continue;
 			
 			ArrayList<Point2D.Double> points = new ArrayList<>();
-			for (int i = 0; i < args.length/2; i++) {
-				double x = java.lang.Double.parseDouble(args[2*i]);
-				double y = java.lang.Double.parseDouble(args[2*i+1]);
+			for (int i = 0; i < coords.length/2; i++) {
+				double x = java.lang.Double.parseDouble(coords[2*i]);
+				double y = java.lang.Double.parseDouble(coords[2*i+1]);
 				points.add(new Point2D.Double(x, y));
 			}
 			
-			drawing.add(Curve.createFromArray(points));
+			Curve c = Curve.createFromArray(points);
+			c.setColor(col);
+			
+			drawing.add(c);
 		}
 		window.getCanvas().setDrawing(drawing);
 	}
@@ -80,7 +93,7 @@ public class FileManager {
 	public String parseDrawingToFiles(ArrayList<Curve> drawing) {
 		String str = "";
 		for (Curve c : drawing) {
-			for (Point2D.Double p : c.getPoints()) str += p.getX() + " " + p.getY() + " ";
+			str += c.getFileData();
 			str += "\n";
 		}
 		return str;

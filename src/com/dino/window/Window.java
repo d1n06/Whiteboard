@@ -32,14 +32,13 @@ public class Window extends JFrame {
 
 		fm = new FileManager(this);
 
-		setJMenuBar(MenuBar.makeMenuBar(canvas, fm));
-		
 		getContentPane().setLayout(new BorderLayout());
 
 		canvas = new Canvas(this);
 		getContentPane().add(ToolBar.makeToolBar(canvas), BorderLayout.PAGE_START);
 		getContentPane().add(canvas, BorderLayout.CENTER);
-		
+
+		setJMenuBar(MenuBar.makeMenuBar(canvas, fm));
 		
 		setVisible(true);
 		
